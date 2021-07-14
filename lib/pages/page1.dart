@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gestores_de_estado/models/usuario.dart';
+
+import 'package:gestores_de_estado/services/usuario_service.dart';
 
 
 class Page1Page extends StatelessWidget {
@@ -11,7 +14,10 @@ class Page1Page extends StatelessWidget {
         title: Text( 'Page 1' ),
       ),
 
-      body: _InformacionUsuario(),
+      // Se utiliza el singleton para mostrar un widget si es que existe información
+      body: usuarioService.existeUsuario
+        ? _InformacionUsuario( usuario: usuarioService.usuario, ) // Manda los valores colocados desde la pagina 2
+        : Center( child: Text('No hay información del usuario'), ),
 
      floatingActionButton: FloatingActionButton(
        onPressed: () => Navigator.pushNamed(context, 'page2')
@@ -21,8 +27,12 @@ class Page1Page extends StatelessWidget {
 }
 
 class _InformacionUsuario extends StatelessWidget {
+
+  final Usuario usuario;  // Se recibe el usuario del usuarioService que se establece en la pagina 2
+
   const _InformacionUsuario({
     Key? key,
+    required this.usuario,
   }) : super(key: key);
 
   @override
@@ -42,8 +52,8 @@ class _InformacionUsuario extends StatelessWidget {
 
           Text('General', style: TextStyle( fontWeight: FontWeight.w500, fontSize: screenSize.width * 0.05 ),),
           Divider(),
-          ListTile( title: Text('Nombre:'), ),
-          ListTile( title: Text('Edad:'), ),
+          ListTile( title: Text('Nombre: ${usuario.nombre}'), ),
+          ListTile( title: Text('Edad: ${usuario.edad}'), ),
           Text('Profesiones', style: TextStyle( fontWeight: FontWeight.w500, fontSize: screenSize.width * 0.05 ),),
           Divider(),
           ListTile( title: Text('Profesión N'), ),

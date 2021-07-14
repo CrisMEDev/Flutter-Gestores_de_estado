@@ -8,8 +8,10 @@ class Usuario {
   Usuario({
     required this.nombre,
     required this.edad,
-    this.profesiones
-  });
+    profesiones
+  }): assert( nombre != 'No name'),
+      assert( edad >= 0 ),
+      this.profesiones = profesiones ?? [];
 
 }
 
