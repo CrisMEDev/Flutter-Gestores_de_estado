@@ -15,9 +15,19 @@ class Page1Page extends StatelessWidget {
       ),
 
       // Se utiliza el singleton para mostrar un widget si es que existe información
-      body: usuarioService.existeUsuario
-        ? _InformacionUsuario( usuario: usuarioService.usuario, ) // Manda los valores colocados desde la pagina 2
-        : Center( child: Text('No hay información del usuario'), ),
+      // El stream builder se estará redibujando cada que haya un cambio en el stream
+      body: StreamBuilder(
+        stream: usuarioService.usuarioStream,
+        builder: (BuildContext context, AsyncSnapshot<Usuario?> snapshot) {
+          
+          return snapshot.hasData
+              ? _InformacionUsuario(usuario: usuarioService.usuario)    // Tambien se puede usar snapshot.data ya que contiene la ultima
+                                                                        // información emitida por stream y es la misma que se le establece
+                                                                        // a el singleton
+              : Center( child: Text( 'No hay información del usaurio' ) );
+
+        },
+      ),
 
      floatingActionButton: FloatingActionButton(
        onPressed: () => Navigator.pushNamed(context, 'page2')

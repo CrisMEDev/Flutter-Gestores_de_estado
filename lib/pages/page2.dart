@@ -3,8 +3,10 @@ import 'package:gestores_de_estado/models/usuario.dart';
 
 import 'package:gestores_de_estado/services/usuario_service.dart';
 
+int x = 20;   // Valor usado para aumentar la edad con el boton 'cambiar edad'
 
 class Page2Page extends StatelessWidget {
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class Page2Page extends StatelessWidget {
               splashColor: Colors.red,
               color: Colors.green,
               onPressed: (){
-                usuarioService.cambiarEdad( 27 );
+                usuarioService.cambiarEdad( x++ );
               }
             ),
 
