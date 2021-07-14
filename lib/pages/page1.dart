@@ -18,6 +18,7 @@ class Page1Page extends StatelessWidget {
       // El stream builder se estará redibujando cada que haya un cambio en el stream
       body: StreamBuilder(
         stream: usuarioService.usuarioStream,
+        
         builder: (BuildContext context, AsyncSnapshot<Usuario?> snapshot) {
           
           return snapshot.hasData

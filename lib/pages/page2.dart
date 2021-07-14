@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gestores_de_estado/models/usuario.dart';
 
 import 'package:gestores_de_estado/services/usuario_service.dart';
+import 'package:gestores_de_estado/models/usuario.dart';
 
 int x = 20;   // Valor usado para aumentar la edad con el boton 'cambiar edad'
 
@@ -13,7 +13,25 @@ class Page2Page extends StatelessWidget {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text( 'Page 2' ),
+
+        // Por defecto un stream es creado como un single subscription, es decir, solo hay un lugar donde se puede estar
+        // escuchando el stream y como ya se tiene un stream escuchando en la pagina 1, en la debug console nos saldrá un error tipo:
+        // Bad state: Stream has already been listened to.
+        // Es necesario hacer un broadcast del streamController para que varios widgets puedan escuchar
+        title: StreamBuilder(
+          stream: usuarioService.usuarioStream,
+
+          // Para no perder el estado en la página 2, si ya se creo una instancia del singleton
+          // es usada para agregarla al snapshot.data, de lo contrario sigue mostrando 'Page 2'
+          initialData: ( usuarioService.existeUsuario ) ? usuarioService.usuario : null,
+
+          builder: (BuildContext context, AsyncSnapshot<Usuario?> snapshot) {
+            return snapshot.hasData
+                ? Text( usuarioService.usuario.nombre )
+                : Text( 'Page 2' );
+          },
+        ),
+        
       ),
 
       body: Center(

@@ -7,7 +7,8 @@ class _UsuarioService {
   Usuario? _usuario;
 
   // Se utilizará un stream para saber cuando redibujar los widgets con cada cambio
-  StreamController<Usuario?> _usuarioStreamController = new StreamController<Usuario>();
+  // el broadcast hará que el streamController pueda ser escuchado por varios widgets
+  StreamController<Usuario?> _usuarioStreamController = new StreamController<Usuario>.broadcast();
 
 
   Usuario get usuario => this._usuario ?? Usuario(nombre: 'No name', edad: 0);
@@ -27,6 +28,10 @@ class _UsuarioService {
 
     // Se agrega la información al stream para que notifique a quien este pendiente de el
     this._usuarioStreamController.add( this._usuario );
+  }
+
+  dispose(){
+    this._usuarioStreamController.close();
   }
 
 }
