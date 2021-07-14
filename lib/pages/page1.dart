@@ -14,7 +14,7 @@ class Page1Page extends StatelessWidget {
       body: _InformacionUsuario(),
 
      floatingActionButton: FloatingActionButton(
-       onPressed: () => Navigator.pushReplacementNamed(context, 'page2')
+       onPressed: () => Navigator.pushNamed(context, 'page2')
     ),
    );
   }

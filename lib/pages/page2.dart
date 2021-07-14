@@ -42,9 +42,6 @@ class Page2Page extends StatelessWidget {
         ),
      ),
 
-     floatingActionButton: FloatingActionButton(
-       onPressed: () => Navigator.pushReplacementNamed(context, 'page1'),
-    ),
    );
   }
 }
