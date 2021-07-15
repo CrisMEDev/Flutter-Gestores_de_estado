@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:gestores_de_estado/bloc/usuario/usuario_cubit.dart';
+
 
 class Page1Page extends StatelessWidget {
 
@@ -11,7 +15,17 @@ class Page1Page extends StatelessWidget {
         title: Text( 'Page 1' ),
       ),
 
-      body: _InformacionUsuario(),
+      // Se utiliza el cubit para decidir que información se debe mostrar dependiendo del estado del mismo cubit
+      body: BlocBuilder<UsuarioCubit, UsuarioState>(
+        builder: ( _ , state ) {
+
+          // print( state ); // Instance of 'UsuarioInitial'
+
+          if ( state is UsuarioInitial )  return Center( child: Text('No hay usuario que mostrar'), );
+
+          else return _InformacionUsuario();
+
+        }),
 
      floatingActionButton: FloatingActionButton(
        onPressed: () => Navigator.pushNamed(context, 'page2')
