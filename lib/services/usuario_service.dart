@@ -12,6 +12,10 @@ class UsuarioService with ChangeNotifier {
 
   set usuario(Usuario usuario) {
     this._usuario = usuario;
+
+    // Notifica a los widgets en donde este instanciado el provider UsuarioService
+    // que hubó un cambio en el usuario para que se redibuje
+    notifyListeners();
   }
 
 }

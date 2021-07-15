@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gestores_de_estado/models/usuario.dart';
+
+import 'package:provider/provider.dart';
+
+import 'package:gestores_de_estado/services/usuario_service.dart';
 
 
 class Page2Page extends StatelessWidget {
@@ -21,7 +26,16 @@ class Page2Page extends StatelessWidget {
               child: Text('Establecer usuario', style: TextStyle( color: Colors.white ),),
               splashColor: Colors.red,
               color: Colors.green,
-              onPressed: (){}
+              onPressed: (){
+
+                // Se usa una instancia del provider UsuarioService para establecer data al usuario
+                // como por defecto el listen es true, debe ser cambiado a false ya que intentará dibujar
+                // fuera del árbol de widgets
+                final usuarioService = Provider.of<UsuarioService>( context, listen: false );
+
+                usuarioService.usuario = new Usuario(nombre: 'Cristian', edad: 26, profesiones: ['Software engineer']);
+
+              }
             ),
 
             MaterialButton(
