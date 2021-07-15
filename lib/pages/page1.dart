@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
+import 'package:gestores_de_estado/services/usuario_service.dart';
+
 
 class Page1Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // Se usa la instancia de provider para saber si hay alguna data sobre el usuario para mostrar
+    final usuarioService = Provider.of<UsuarioService>(context);
+
     return Scaffold(
 
       appBar: AppBar(
         title: Text( 'Page 1' ),
       ),
 
-      body: _InformacionUsuario(),
+      body: usuarioService.existeUsuario 
+              ? _InformacionUsuario()
+              : Center( child: Text('No hay usuario para mostrar'), ),
 
      floatingActionButton: FloatingActionButton(
        onPressed: () => Navigator.pushNamed(context, 'page2')

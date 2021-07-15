@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+import 'package:gestores_de_estado/services/usuario_service.dart';
+
+import 'package:provider/provider.dart';
 
 import 'package:gestores_de_estado/pages/page1.dart';
 import 'package:gestores_de_estado/pages/page2.dart';
@@ -15,17 +18,26 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown
     ]);
 
-    return MaterialApp(
-      title: 'Gestores de estado',
-      debugShowCheckedModeBanner: false,
-      
-      initialRoute: 'page1',
+    // Todos los widgets de aqui para abajó en el árbol de widgets tendrán acceso a
+    // UsuarioService
+    return MultiProvider(
 
-      routes: {
-        'page1':          ( BuildContext context ) => Page1Page(),
-        'page2':          ( BuildContext context ) => Page2Page()
-      },
+      providers: [
+        ChangeNotifierProvider<UsuarioService>( create: ( _ ) => UsuarioService() )
+      ],
 
+      child: MaterialApp(
+        title: 'Gestores de estado',
+        debugShowCheckedModeBanner: false,
+        
+        initialRoute: 'page1',
+    
+        routes: {
+          'page1':          ( BuildContext context ) => Page1Page(),
+          'page2':          ( BuildContext context ) => Page2Page()
+        },
+    
+      ),
     );
   }
 }

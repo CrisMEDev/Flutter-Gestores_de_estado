@@ -8,8 +8,8 @@ class Usuario {
   Usuario({
     required this.nombre,
     required this.edad,
-    this.profesiones
-  });
+    profesiones
+  }): this.profesiones = profesiones ?? [];
 
 }
 
