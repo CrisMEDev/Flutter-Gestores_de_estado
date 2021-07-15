@@ -19,6 +19,16 @@ class Page1Page extends StatelessWidget {
 
       appBar: AppBar(
         title: Text( 'Page 1' ),
+        actions: [
+          IconButton(
+            onPressed: (){
+
+              usuarioService.removerUsuario();
+
+            },
+            icon: Icon(Icons.delete)
+          )
+        ],
       ),
 
       body: usuarioService.existeUsuario 
@@ -63,9 +73,13 @@ class _InformacionUsuario extends StatelessWidget {
           ListTile( title: Text('Edad: ${ usuario.edad }'), ),
           Text('Profesiones', style: TextStyle( fontWeight: FontWeight.w500, fontSize: screenSize.width * 0.05 ),),
           Divider(),
-          ListTile( title: Text('Profesión: ${ usuario.profesiones?[0] }'), ),
-          ListTile( title: Text('Profesión N'), ),
-          ListTile( title: Text('Profesión N'), ),
+          
+          // Se usa un map para devolver un ListTile con cada profesion, después todos los ListTiles son
+          // pasados de un Iterable a una lista de ListTiles para finalmente usar desestructuración
+          // con el operador ... y usar los ListTiles de manera individual
+          ...usuario.profesiones!.map(( profesion ) => ListTile( title: Text('Profesión: $profesion') )).toList( ),
+
+          // ListTile( title: Text('Profesión: ${ usuario.profesiones?[0] }'), ),
           Text('Text 3', style: TextStyle( fontWeight: FontWeight.w500, fontSize: screenSize.width * 0.05 ),)
 
         ]

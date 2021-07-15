@@ -33,7 +33,14 @@ class Page2Page extends StatelessWidget {
                 // fuera del árbol de widgets
                 final usuarioService = Provider.of<UsuarioService>( context, listen: false );
 
-                usuarioService.usuario = new Usuario(nombre: 'Cristian', edad: 26, profesiones: ['Software engineer']);
+                usuarioService.usuario = new Usuario(
+                  nombre: 'Cristian',
+                  edad: 26,
+                  profesiones: [
+                    'Software engineer',
+                    'Fullstack developer',
+                  ]
+                );
 
               }
             ),
@@ -42,14 +49,26 @@ class Page2Page extends StatelessWidget {
               child: Text('Cambiar edad:', style: TextStyle( color: Colors.white ),),
               splashColor: Colors.red,
               color: Colors.green,
-              onPressed: (){}
+              onPressed: (){
+
+                final usuarioService = Provider.of<UsuarioService>( context, listen: false );
+
+                usuarioService.cambiarEdad(30);
+
+              }
             ),
 
             MaterialButton(
               child: Text('Agregar profesión', style: TextStyle( color: Colors.white ),),
               splashColor: Colors.red,
               color: Colors.green,
-              onPressed: (){}
+              onPressed: (){
+
+                final usuarioService = Provider.of<UsuarioService>( context, listen: false );
+
+                usuarioService.agregarProfesion('Programmer');
+
+              }
             ),
             
           ],

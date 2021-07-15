@@ -18,4 +18,22 @@ class UsuarioService with ChangeNotifier {
     notifyListeners();
   }
 
+  void cambiarEdad( int edad ){
+    this.usuario.edad = edad;
+
+    notifyListeners();
+  }
+
+  void removerUsuario(){
+    this._usuario = null;
+
+    notifyListeners();
+  }
+
+  void agregarProfesion( String profesion ){
+    this._usuario!.profesiones?.add( profesion );
+
+    notifyListeners();
+  }
+
 }
