@@ -31,3 +31,5 @@ class AgregarProfesion extends UsuarioEvent {
 
 }
 
+class BorrarUsuario extends UsuarioEvent {}
+

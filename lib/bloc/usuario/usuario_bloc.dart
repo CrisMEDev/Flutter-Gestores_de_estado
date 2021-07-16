@@ -23,12 +23,16 @@ class UsuarioBloc extends Bloc<UsuarioEvent, UsuarioState> {
     if ( event is ActivarUsuario ){
 
       // Se usa yield para emitir un estado
-      yield UsuarioState( usuario: event.usuario );
+      yield state.copyWith(
+        usuario: event.usuario
+      );
 
     } else if ( event is CambiarEdad ){
 
       // Se usa el state para devolver un nuevo estado del usuario pero solo cambiando la edad de los datos actuales
-      yield UsuarioState( usuario: state.usuario?.copyWith( edad: event.edad) );
+      yield state.copyWith(
+        usuario: state.usuario?.copyWith( edad: event.edad)
+      );
 
     }  else if ( event is AgregarProfesion ) {
 
@@ -36,7 +40,12 @@ class UsuarioBloc extends Bloc<UsuarioEvent, UsuarioState> {
 
       newProfesiones?.add( event.profesion + ': ${state.usuario?.profesiones?.length}' );
 
-      yield UsuarioState( usuario: state.usuario?.copyWith( profesiones: newProfesiones ) );
+      yield state.copyWith(
+        usuario: state.usuario?.copyWith( profesiones: newProfesiones )
+      );
+
+    } else if ( event is BorrarUsuario ) {
+      yield state.estadoInicial();
     } else {
       yield UsuarioState();
     }
