@@ -15,11 +15,19 @@ class UsuarioBloc extends Bloc<UsuarioEvent, UsuarioState> {
   UsuarioBloc() : super( UsuarioState() );
   
   @override
-  Stream<UsuarioState> mapEventToState(UsuarioEvent event) {
+  Stream<UsuarioState> mapEventToState(UsuarioEvent event) async* {
     
-    print('Hola mundo');
+    // print(event);
+
+    // Si el evento recibido es tipo ActivarUsuario se emite un estado nuevo con el usuario recibido
+    if ( event is ActivarUsuario ){
+      // Se usa yield para emitir un estado
+      yield UsuarioState( usuario: event.usuario );
+    } else {
+      yield UsuarioState();
+    }
+
     
-    throw UnimplementedError();
   }
 
   
