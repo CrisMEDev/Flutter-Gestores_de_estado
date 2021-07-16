@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:gestores_de_estado/bloc/usuario/usuario_bloc.dart';
+
 
 class Page1Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
 
       appBar: AppBar(
         title: Text( 'Page 1' ),
       ),
 
-      body: _InformacionUsuario(),
+      body: BlocBuilder<UsuarioBloc, UsuarioState>(
+        builder: (context, state) {
+          
+          if ( state.existeUsuario ){
+            return _InformacionUsuario();
+          } else {
+            return Center( child: Text('No hay usuario que mostrar') );
+          }
+
+        },
+      ),
 
      floatingActionButton: FloatingActionButton(
        onPressed: () => Navigator.pushNamed(context, 'page2')

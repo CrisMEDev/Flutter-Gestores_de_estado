@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:gestores_de_estado/bloc/usuario/usuario_bloc.dart';
 
 import 'package:gestores_de_estado/pages/page1.dart';
 import 'package:gestores_de_estado/pages/page2.dart';
@@ -15,17 +18,25 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown
     ]);
 
-    return MaterialApp(
-      title: 'Gestores de estado',
-      debugShowCheckedModeBanner: false,
-      
-      initialRoute: 'page1',
+    // MultiBlocBrovider para definir los blocs que se usaran en la app
+    return MultiBlocProvider(
 
-      routes: {
-        'page1':          ( BuildContext context ) => Page1Page(),
-        'page2':          ( BuildContext context ) => Page2Page()
-      },
+      providers: [
+        BlocProvider(create: ( _ ) => UsuarioBloc( /*Aqui se podría definir data para el estado inicial de la app*/  ) )
+      ],
 
+      child: MaterialApp(
+        title: 'Gestores de estado',
+        debugShowCheckedModeBanner: false,
+        
+        initialRoute: 'page1',
+    
+        routes: {
+          'page1':          ( BuildContext context ) => Page1Page(),
+          'page2':          ( BuildContext context ) => Page2Page()
+        },
+    
+      ),
     );
   }
 }

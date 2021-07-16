@@ -5,7 +5,7 @@ part of 'usuario_bloc.dart';
 class UsuarioState {
 
   // Se usa final para crear un estado inmutable una vez se cree una instancia de este estado
-  final existeUsuario;
+  final bool existeUsuario;
   final Usuario? usuario;
 
   UsuarioState({
