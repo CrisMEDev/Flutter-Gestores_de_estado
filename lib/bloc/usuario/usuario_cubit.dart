@@ -19,4 +19,19 @@ class UsuarioCubit extends Cubit<UsuarioState> {    // El cubit solo aceptará e
     emit( UsuarioActivo( user ) );
   }
 
+  void cambiarEdad( int edad ){
+
+    final currentState = state;
+
+    if ( currentState is UsuarioActivo ){
+
+      // Se usa el estado actual y el método que clona un usuario para actualizar la edad y devolver un nuevo estado
+      final newUser = currentState.usuario.copyWith( edad: edad );
+
+      emit( UsuarioActivo( newUser ) );
+    }
+
+
+  }
+
 }
