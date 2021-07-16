@@ -31,7 +31,25 @@ class UsuarioCubit extends Cubit<UsuarioState> {    // El cubit solo aceptará e
       emit( UsuarioActivo( newUser ) );
     }
 
+  }
+
+  void agregarProfesion(){
+
+    final currentState = state;
+
+    if ( currentState is UsuarioActivo ){
+
+      final profs = currentState.usuario.profesiones;
+      profs?.add('Profesion ${profs.length + 1}');
+
+      final newUser = currentState.usuario.copyWith( profesiones: profs );
+
+      emit( UsuarioActivo( newUser ) );
+
+    }
 
   }
+
+  void borrarUsuario() => emit( UsuarioInitial() );
 
 }

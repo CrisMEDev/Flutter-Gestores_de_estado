@@ -10,10 +10,20 @@ class Page1Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final usuarioCubit = BlocProvider.of<UsuarioCubit>(context);
+
     return Scaffold(
 
       appBar: AppBar(
         title: Text( 'Page 1' ),
+
+        actions: [
+          IconButton(
+            onPressed: () => usuarioCubit.borrarUsuario(),
+            icon: Icon(Icons.delete)
+          )
+        ],
       ),
 
       // Se utiliza el cubit para decidir que información se debe mostrar dependiendo del estado del mismo cubit
