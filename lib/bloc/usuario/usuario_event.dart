@@ -23,3 +23,11 @@ class CambiarEdad extends UsuarioEvent {
   
 }
 
+class AgregarProfesion extends UsuarioEvent {
+
+  final String profesion;
+
+  AgregarProfesion(this.profesion);
+
+}
+
