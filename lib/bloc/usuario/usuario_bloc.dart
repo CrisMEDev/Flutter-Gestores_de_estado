@@ -23,6 +23,9 @@ class UsuarioBloc extends Bloc<UsuarioEvent, UsuarioState> {
     if ( event is ActivarUsuario ){
       // Se usa yield para emitir un estado
       yield UsuarioState( usuario: event.usuario );
+    } else if ( event is CambiarEdad ){
+      // Se usa el state para devolver un nuevo estado del usuario pero solo cambiando la edad de los datos actuales
+      yield UsuarioState( usuario: state.usuario?.copyWith( edad: event.edad) );
     } else {
       yield UsuarioState();
     }

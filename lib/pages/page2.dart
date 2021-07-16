@@ -46,7 +46,9 @@ class Page2Page extends StatelessWidget {
               child: Text('Cambiar edad:', style: TextStyle( color: Colors.white ),),
               splashColor: Colors.red,
               color: Colors.green,
-              onPressed: (){}
+              onPressed: (){
+                usuarioBloc.add( CambiarEdad(30) );
+              }
             ),
 
             MaterialButton(
