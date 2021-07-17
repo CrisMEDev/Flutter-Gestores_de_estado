@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:gestores_de_estado/pages/page2.dart';
 
 import 'package:get/get.dart';
+
+import 'package:gestores_de_estado/controllers/usuario_controller.dart';
 
 
 class Page1Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // Se inyecta la dependencia al contex manejado por getx para que a partir
+    // de este widget se pueda obtener la misma instancia del UsuarioController donde se necesite
+    final usuarioCtrl = Get.put( UsuarioController() );
+
     return Scaffold(
 
       appBar: AppBar(
         title: Text( 'Page 1' ),
       ),
 
-      body: _InformacionUsuario(),
+      body: Obx( 
+        () => usuarioCtrl.existeUsuario.value
+              ? _InformacionUsuario()
+              : Center( child: Text('No hay usuario que mostrar') )
+      ),
 
      floatingActionButton: FloatingActionButton(
       //  onPressed: () => Navigator.pushNamed(context, 'page2')
