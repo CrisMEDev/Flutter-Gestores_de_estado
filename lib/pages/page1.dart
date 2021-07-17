@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:gestores_de_estado/controllers/usuario_controller.dart';
+import 'package:gestores_de_estado/models/usuario.dart';
 
 
 class Page1Page extends StatelessWidget {
@@ -22,7 +23,7 @@ class Page1Page extends StatelessWidget {
 
       body: Obx( 
         () => usuarioCtrl.existeUsuario.value
-              ? _InformacionUsuario()
+              ? _InformacionUsuario( usuario: usuarioCtrl.usuario.value )
               : Center( child: Text('No hay usuario que mostrar') )
       ),
 
@@ -40,8 +41,12 @@ class Page1Page extends StatelessWidget {
 }
 
 class _InformacionUsuario extends StatelessWidget {
+
+  final Usuario usuario;
+
   const _InformacionUsuario({
     Key? key,
+    required this.usuario
   }) : super(key: key);
 
   @override
@@ -61,13 +66,13 @@ class _InformacionUsuario extends StatelessWidget {
 
           Text('General', style: TextStyle( fontWeight: FontWeight.w500, fontSize: screenSize.width * 0.05 ),),
           Divider(),
-          ListTile( title: Text('Nombre:'), ),
-          ListTile( title: Text('Edad:'), ),
+          ListTile( title: Text('Nombre: ${usuario.nombre}'), ),
+          ListTile( title: Text('Edad: ${usuario.edad}'), ),
           Text('Profesiones', style: TextStyle( fontWeight: FontWeight.w500, fontSize: screenSize.width * 0.05 ),),
           Divider(),
-          ListTile( title: Text('Profesión N'), ),
-          ListTile( title: Text('Profesión N'), ),
-          ListTile( title: Text('Profesión N'), ),
+          ...usuario.profesiones.map(
+            (profesion) => ListTile(title: Text(profesion))
+          ).toList(),
           Text('Text 3', style: TextStyle( fontWeight: FontWeight.w500, fontSize: screenSize.width * 0.05 ),)
 
         ]
