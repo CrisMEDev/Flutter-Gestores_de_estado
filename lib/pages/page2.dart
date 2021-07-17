@@ -47,6 +47,18 @@ class Page2Page extends StatelessWidget {
                 );
 
                 usuarioCtrl.cargarUsuario( newUser );
+
+                Get.snackbar(
+                  'Usuario establecido',
+                  'Cristian es su nombre',
+                  backgroundColor: Colors.white,
+                  boxShadows: [
+                    BoxShadow(
+                      color: Colors.black38,
+                      blurRadius: 10
+                    ),
+                  ]
+                );
               }
             ),
 
