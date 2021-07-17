@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gestores_de_estado/pages/page2.dart';
+
+import 'package:get/get.dart';
 
 
 class Page1Page extends StatelessWidget {
@@ -14,7 +17,13 @@ class Page1Page extends StatelessWidget {
       body: _InformacionUsuario(),
 
      floatingActionButton: FloatingActionButton(
-       onPressed: () => Navigator.pushNamed(context, 'page2')
+      //  onPressed: () => Navigator.pushNamed(context, 'page2')
+
+      // Navegación con GetX; se mandan argumentos a la page2
+      onPressed: () => Get.toNamed( 'page2', arguments: {
+        'nombre': 'Cristian',
+        'edad': 26
+      }),
     ),
    );
   }
